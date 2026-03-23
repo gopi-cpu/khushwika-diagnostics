@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khushvika Diagnostics & Care | Hyderabad</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --teal:       #0891b2;
+  --teal2:      #06b6d4;
+  --teal3:      #67e8f9;
+  --tealDark:   #0e7490;
+  --amber:      #f59e0b;
+  --amber2:     #fbbf24;
+  --amber3:     #fde68a;
+  --coral:      #f43f5e;
+  --mint:       #10b981;
+  --sky:        #e0f7fa;
+  --sky2:       #b2ebf2;
+  --white:      #ffffff;
+  --offwhite:   #f0fbff;
+  --lightgray:  #f8fafc;
+  --gray:       #64748b;
+  --dark:       #0f172a;
+  --card:       rgba(255,255,255,0.75);
+  --wa:         #25D366;
+  --wa2:        #128C7E;
+  --g1: linear-gradient(135deg,#0891b2,#06b6d4,#0e7490);
+  --g2: linear-gradient(135deg,#f59e0b,#fbbf24,#f97316);
+  --gHero: linear-gradient(135deg,#e0f7fa 0%,#b2ebf2 30%,#e8f5e9 60%,#fff8e1 100%);
+  --shadow: 0 8px 32px rgba(8,145,178,0.15);
+  --shadowLg: 0 24px 64px rgba(8,145,178,0.2);
+  --r: 20px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--offwhite);
+  color:var(--dark);
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* ──────── CUSTOM CURSOR ──────── */
+#cur{
+  width:14px;height:14px;border-radius:50%;
+  background:var(--teal);
+  position:fixed;z-index:9999;pointer-events:none;
+  transform:translate(-50%,-50%);
+  transition:width .25s,height .25s,background .25s;
+  mix-blend-mode:multiply;
+}
+#curR{
+  width:38px;height:38px;border-radius:50%;
+  border:2px solid rgba(8,145,178,.4);
+  position:fixed;z-index:9998;pointer-events:none;
+  transform:translate(-50%,-50%);
+  transition:all .12s ease;
+}
+body a:hover~#cur,body button:hover~#cur{width:24px;height:24px;}
+
+/* ──────── LOADER ──────── */
+#loader{
+  position:fixed;inset:0;z-index:9000;
+  background:linear-gradient(135deg,#0891b2,#06b6d4);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  transition:opacity .8s,visibility .8s;
+}
+#loader.gone{opacity:0;visibility:hidden;pointer-events:none}
+.ld-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:52px;font-weight:700;color:#fff;
+  letter-spacing:2px;
+  animation:ldIn .9s ease both;
+}
+.ld-logo span{color:var(--amber2)}
+.ld-sub{font-size:13px;color:rgba(255,255,255,.65);letter-spacing:3px;text-transform:uppercase;margin-top:4px;animation:ldIn .9s .15s ease both}
+.ld-bar{width:220px;height:3px;background:rgba(255,255,255,.2);border-radius:3px;margin-top:28px;overflow:hidden}
+.ld-fill{height:100%;background:#fff;border-radius:3px;animation:ldBar 2s ease forwards}
+.ld-pulse{
+  width:60px;height:60px;border-radius:50%;
+  border:3px solid rgba(255,255,255,.3);
+  margin-bottom:28px;
+  position:relative;
+  animation:ldPulse 1.5s ease-in-out infinite;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;color:#fff;
+}
+@keyframes ldIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ldBar{from{width:0}to{width:100%}}
+@keyframes ldPulse{0%,100%{transform:scale(1);border-color:rgba(255,255,255,.3)}50%{transform:scale(1.1);border-color:rgba(255,255,255,.7)}}
+
+/* ──────── NAVBAR ──────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:0 60px;height:80px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .4s ease;
+}
+nav.stuck{
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(20px);
+  box-shadow:0 4px 24px rgba(8,145,178,.12);
+  border-bottom:1px solid rgba(8,145,178,.1);
+  height:68px;
+}
+.nLogo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nIcon{
+  width:46px;height:46px;border-radius:14px;
+  background:var(--g1);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:20px;
+  box-shadow:0 4px 16px rgba(8,145,178,.35);
+  animation:iconFloat 3s ease-in-out infinite;
+}
+@keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.nTitle h1{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--dark);line-height:1.1}
+.nTitle span{font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;font-weight:600}
+
+.nLinks{display:flex;gap:30px;list-style:none}
+.nLinks a{
+  font-size:14px;font-weight:500;color:var(--gray);
+  text-decoration:none;position:relative;transition:color .2s;
+}
+.nLinks a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--g1);border-radius:2px;transition:width .3s}
+.nLinks a:hover{color:var(--teal)}
+.nLinks a:hover::after{width:100%}
+
+.nBtns{display:flex;gap:10px}
+.bWa{
+  display:flex;align-items:center;gap:7px;
+  padding:10px 18px;border-radius:50px;
+  background:var(--wa);color:#fff;
+  font-size:13px;font-weight:700;text-decoration:none;
+  transition:all .3s;border:none;
+  box-shadow:0 4px 14px rgba(37,211,102,.35);
+}
+.bWa:hover{background:var(--wa2);transform:translateY(-2px);box-shadow:0 8px 22px rgba(37,211,102,.45)}
+.bBook{
+  display:flex;align-items:center;gap:7px;
+  padding:10px 22px;border-radius:50px;
+  background:var(--g1);color:#fff;
+  font-size:13px;font-weight:700;
+  border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;
+  transition:all .3s;box-shadow:0 4px 14px rgba(8,145,178,.35);
+}
+.bBook:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(8,145,178,.5)}
+
+/* ──────── HERO ──────── */
+.hero{
+  min-height:100vh;
+  background:var(--gHero);
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;
+}
+
+/* Animated mesh blobs */
+.blob{
+  position:absolute;border-radius:50%;
+  filter:blur(60px);opacity:.35;
+  animation:blobMove linear infinite alternate;
+}
+.blob1{width:500px;height:500px;background:radial-gradient(circle,#67e8f9,#06b6d4);top:-100px;left:-100px;animation-duration:8s}
+.blob2{width:400px;height:400px;background:radial-gradient(circle,#fde68a,#fbbf24);top:20%;right:-80px;animation-duration:10s;animation-delay:2s}
+.blob3{width:350px;height:350px;background:radial-gradient(circle,#a7f3d0,#10b981);bottom:-80px;left:35%;animation-duration:12s;animation-delay:1s}
+.blob4{width:280px;height:280px;background:radial-gradient(circle,#fecdd3,#f43f5e);bottom:10%;left:60%;animation-duration:9s;animation-delay:3s}
+@keyframes blobMove{
+  0%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(30px,-20px) scale(1.08)}
+  66%{transform:translate(-20px,15px) scale(.95)}
+  100%{transform:translate(10px,10px) scale(1.04)}
+}
+
+/* Floating DNA/cross icons */
+.floatIcon{
+  position:absolute;font-size:28px;opacity:.12;
+  animation:floatUp linear infinite;
+  color:var(--teal);
+}
+@keyframes floatUp{
+  from{transform:translateY(110vh) rotate(0deg);opacity:0}
+  10%{opacity:.12}
+  90%{opacity:.12}
+  to{transform:translateY(-100px) rotate(360deg);opacity:0}
+}
+
+/* Grid lines */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(8,145,178,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(8,145,178,.06) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+
+.heroInner{
+  max-width:1280px;margin:0 auto;width:100%;
+  padding:120px 60px 80px;
+  display:grid;grid-template-columns:1fr 430px;gap:72px;align-items:center;
+  position:relative;z-index:2;
+}
+
+.heroBadge{
+  display:inline-flex;align-items:center;gap:9px;
+  background:rgba(255,255,255,.85);backdrop-filter:blur(8px);
+  border:1.5px solid rgba(8,145,178,.25);
+  border-radius:50px;padding:7px 18px;margin-bottom:22px;
+  box-shadow:0 4px 16px rgba(8,145,178,.12);
+  animation:fadeUp .8s .3s both;
+}
+.heroBadge .pulse{width:8px;height:8px;background:var(--mint);border-radius:50%;animation:ping 1.8s infinite}
+@keyframes ping{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.4}}
+.heroBadge span{font-size:12px;font-weight:700;color:var(--teal);letter-spacing:.5px}
+
+.heroH1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(46px,5.5vw,76px);
+  font-weight:700;line-height:1.05;
+  color:var(--dark);margin-bottom:20px;
+  animation:fadeUp .8s .45s both;
+}
+.heroH1 .g{
+  background:var(--g1);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  font-style:italic;
+}
+.heroH1 .gA{
+  background:var(--g2);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+.heroP{
+  font-size:16px;line-height:1.8;color:var(--gray);
+  max-width:500px;margin-bottom:36px;
+  animation:fadeUp .8s .6s both;
+}
+
+.heroCtas{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .8s .75s both}
+.btnPrimary{
+  padding:15px 32px;border-radius:50px;
+  background:var(--g1);color:#fff;
+  font-size:15px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;
+  border:none;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;gap:9px;
+  transition:all .3s;position:relative;overflow:hidden;
+  box-shadow:0 6px 20px rgba(8,145,178,.4);
+}
+.btnPrimary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.25),transparent);
+  transform:translateX(-100%) skewX(-20deg);transition:.45s;
+}
+.btnPrimary:hover::after{transform:translateX(200%) skewX(-20deg)}
+.btnPrimary:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(8,145,178,.5)}
+.btnWaOutline{
+  padding:15px 32px;border-radius:50px;
+  background:rgba(37,211,102,.1);color:#16a34a;
+  border:2px solid rgba(37,211,102,.4);
+  font-size:15px;font-weight:700;text-decoration:none;
+  display:inline-flex;align-items:center;gap:9px;
+  transition:all .3s;
+}
+.btnWaOutline:hover{background:var(--wa);color:#fff;border-color:var(--wa);transform:translateY(-3px);box-shadow:0 12px 28px rgba(37,211,102,.4)}
+
+.heroStats{
+  display:flex;gap:36px;margin-top:44px;
+  padding-top:36px;border-top:1px solid rgba(8,145,178,.15);
+  animation:fadeUp .8s .9s both;
+}
+.hStat .n{
+  font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:700;line-height:1;
+  background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hStat .l{font-size:11px;color:var(--gray);margin-top:3px;text-transform:uppercase;letter-spacing:1px;font-weight:600}
+
+/* BOOKING GLASS CARD */
+.bookCard{
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(24px);
+  border:1.5px solid rgba(255,255,255,.9);
+  border-radius:28px;padding:36px;
+  box-shadow:0 24px 64px rgba(8,145,178,.18),0 0 0 1px rgba(255,255,255,.6) inset;
+  animation:fadeLeft .9s .5s both;
+  position:relative;overflow:hidden;
+}
+.bookCard::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:180px;height:180px;
+  background:radial-gradient(circle,rgba(8,145,178,.12),transparent 70%);
+  border-radius:50%;
+}
+.bookCard h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--dark);margin-bottom:3px}
+.bookCard>p{font-size:13px;color:var(--gray);margin-bottom:22px}
+
+.lbl{font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;display:block}
+.inp{
+  width:100%;padding:12px 14px;
+  background:#fff;
+  border:1.5px solid #e2e8f0;
+  border-radius:12px;color:var(--dark);
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;
+  outline:none;transition:all .25s;margin-bottom:12px;
+}
+.inp:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(8,145,178,.12)}
+.inp option{background:#fff;color:var(--dark)}
+.gr2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bBtn{
+  width:100%;padding:14px;border:none;border-radius:14px;
+  background:var(--g1);color:#fff;cursor:pointer;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:all .3s;margin-bottom:9px;
+  box-shadow:0 6px 20px rgba(8,145,178,.35);
+}
+.bBtn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(8,145,178,.5)}
+.bWaBtn{
+  width:100%;padding:12px;border:none;border-radius:14px;
+  background:rgba(37,211,102,.1);color:#16a34a;
+  border:1.5px solid rgba(37,211,102,.3);
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;
+  cursor:pointer;transition:all .3s;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  text-decoration:none;
+}
+.bWaBtn:hover{background:var(--wa);color:#fff;border-color:var(--wa)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeLeft{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:translateX(0)}}
+
+/* ──────── WAVE DIVIDER ──────── */
+.wave{width:100%;overflow:hidden;line-height:0;margin-top:-2px}
+.wave svg{display:block}
+
+/* ──────── SECTION BASE ──────── */
+.sec{padding:96px 60px;position:relative}
+.secInner{max-width:1280px;margin:0 auto}
+.secLabel{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:800;color:var(--teal);
+  letter-spacing:2.5px;text-transform:uppercase;margin-bottom:8px;
+}
+.secLabel::before{content:'';width:24px;height:2.5px;background:var(--g2);border-radius:3px}
+.secTitle{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(30px,3vw,46px);font-weight:700;line-height:1.15;
+  color:var(--dark);
+}
+.secTitle .g{background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:italic}
+.secTitle .gA{background:var(--g2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.secSub{font-size:15px;color:var(--gray);line-height:1.75;max-width:500px;margin-top:10px}
+
+/* ──────── HOSPITAL SHOWCASE ──────── */
+.showcase{background:linear-gradient(135deg,#e0f7fa,#e8f5e9,#fff8e1)}
+.showGrid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.showImgWrap{
+  position:relative;border-radius:28px;overflow:hidden;
+  box-shadow:0 32px 80px rgba(8,145,178,.22);
+  transition:transform .4s;
+}
+.showImgWrap:hover{transform:translateY(-6px) scale(1.01)}
+.showImgWrap img{width:100%;display:block}
+.showImgWrap::after{
+  content:'';position:absolute;inset:0;
+  border-radius:28px;
+  background:linear-gradient(to top,rgba(8,145,178,.12),transparent 50%);
+  pointer-events:none;
+}
+.imgBadge{
+  position:absolute;bottom:20px;left:20px;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
+  border:1px solid rgba(8,145,178,.2);border-radius:14px;
+  padding:12px 18px;display:flex;align-items:center;gap:10px;
+  box-shadow:0 8px 24px rgba(8,145,178,.15);
+}
+.bdot{width:9px;height:9px;background:var(--mint);border-radius:50%;animation:ping 2s infinite}
+.bInfo strong{display:block;font-size:13px;font-weight:700;color:var(--dark)}
+.bInfo span{font-size:11px;color:var(--gray)}
+
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}
+.pill{
+  display:flex;align-items:center;gap:7px;
+  background:#fff;border:1.5px solid rgba(8,145,178,.2);
+  border-radius:50px;padding:8px 16px;
+  font-size:13px;font-weight:600;color:var(--teal);
+  box-shadow:0 2px 8px rgba(8,145,178,.08);
+  transition:all .25s;
+}
+.pill i{font-size:12px;color:var(--amber)}
+.pill:hover{background:var(--teal);color:#fff;border-color:var(--teal);transform:translateY(-2px);box-shadow:0 6px 16px rgba(8,145,178,.3)}
+.pill:hover i{color:#fff}
+
+/* ──────── SERVICES ──────── */
+.svcBg{background:linear-gradient(180deg,#fff 0%,#f0fbff 100%)}
+.svcGrid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px;
+}
+.svcCard{
+  background:#fff;border:1.5px solid #e2f5f8;
+  border-radius:22px;padding:30px 22px;
+  text-align:center;cursor:pointer;
+  transition:all .35s cubic-bezier(.34,1.56,.64,1);
+  position:relative;overflow:hidden;
+  box-shadow:0 4px 16px rgba(8,145,178,.07);
+}
+.svcCard::before{
+  content:'';position:absolute;inset:0;
+  background:var(--g1);opacity:0;transition:opacity .35s;border-radius:22px;
+}
+.svcCard::after{
+  content:'';position:absolute;
+  width:90px;height:90px;border-radius:50%;
+  background:rgba(8,145,178,.06);
+  right:-20px;bottom:-20px;transition:all .4s;
+}
+.svcCard:hover{transform:translateY(-10px) scale(1.02);border-color:transparent;box-shadow:var(--shadowLg)}
+.svcCard:hover::before{opacity:1}
+.svcCard:hover::after{width:130px;height:130px;background:rgba(255,255,255,.08)}
+.svcIco{
+  width:66px;height:66px;border-radius:18px;
+  background:linear-gradient(135deg,#e0f7fa,#b2ebf2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;color:var(--teal);
+  margin:0 auto 16px;position:relative;z-index:1;
+  transition:all .35s;box-shadow:0 4px 14px rgba(8,145,178,.15);
+}
+.svcCard:hover .svcIco{background:rgba(255,255,255,.2);color:#fff;box-shadow:0 4px 14px rgba(255,255,255,.2)}
+.svcName{font-size:14px;font-weight:700;color:var(--dark);position:relative;z-index:1;transition:.3s;margin-bottom:4px}
+.svcSub{font-size:12px;color:var(--gray);position:relative;z-index:1;transition:.3s}
+.svcCard:hover .svcName,.svcCard:hover .svcSub{color:#fff}
+
+/* ──────── PACKAGES ──────── */
+.pkgBg{background:linear-gradient(135deg,#f0fbff,#fff8e1,#f0fdf4)}
+.pkgGrid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px;
+}
+.pkgCard{
+  background:#fff;border-radius:24px;overflow:hidden;
+  border:1.5px solid #e2f5f8;
+  box-shadow:0 8px 28px rgba(8,145,178,.1);
+  transition:all .35s;position:relative;
+}
+.pkgCard:hover{transform:translateY(-10px);box-shadow:0 28px 72px rgba(8,145,178,.2)}
+.pkgCard.pop{border-color:var(--teal);box-shadow:0 12px 40px rgba(8,145,178,.2)}
+.popTag{
+  position:absolute;top:18px;right:18px;z-index:5;
+  background:var(--g2);color:#fff;
+  font-size:10px;font-weight:800;padding:5px 12px;border-radius:50px;
+  letter-spacing:.5px;box-shadow:0 4px 12px rgba(245,158,11,.4);
+  animation:tagBounce 2s ease-in-out infinite;
+}
+@keyframes tagBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+.pkgTop{
+  padding:28px;background:var(--g1);position:relative;overflow:hidden;
+}
+.pkgTop::before{
+  content:'';position:absolute;
+  width:160px;height:160px;border-radius:50%;
+  background:rgba(255,255,255,.08);
+  right:-40px;top:-40px;
+}
+.pkgTop::after{
+  content:'';position:absolute;
+  width:100px;height:100px;border-radius:50%;
+  background:rgba(255,255,255,.05);
+  left:-20px;bottom:-30px;
+}
+.pkgTop h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:3px;position:relative;z-index:1}
+.pkgTop .tline{font-size:12px;color:rgba(255,255,255,.7);margin-bottom:14px;position:relative;z-index:1}
+.pkgPriceRow{display:flex;align-items:baseline;gap:5px;position:relative;z-index:1}
+.pkgPrice{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:700;color:var(--amber2)}
+.pkgPer{font-size:13px;color:rgba(255,255,255,.6)}
+
+.pkgBody{padding:22px 24px;background:#fff}
+.pkgList{list-style:none;margin-bottom:18px}
+.pkgList li{
+  display:flex;align-items:center;gap:9px;
+  font-size:13px;color:#475569;
+  padding:7px 0;border-bottom:1px solid #f1f5f9;
+}
+.pkgList li i{color:var(--mint);font-size:11px}
+.pkgBookBtn{
+  width:100%;padding:13px;border:none;border-radius:12px;
+  background:var(--g1);color:#fff;cursor:pointer;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;
+  transition:all .3s;margin-bottom:8px;
+  box-shadow:0 4px 14px rgba(8,145,178,.3);
+}
+.pkgBookBtn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(8,145,178,.45)}
+.pkgWaBtn{
+  width:100%;padding:11px;border-radius:12px;
+  background:rgba(37,211,102,.08);color:#16a34a;
+  border:1.5px solid rgba(37,211,102,.3);
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;
+  cursor:pointer;transition:all .3s;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  text-decoration:none;
+}
+.pkgWaBtn:hover{background:var(--wa);color:#fff;border-color:var(--wa)}
+
+/* ──────── WHY US ──────── */
+.whyBg{
+  background:linear-gradient(135deg,#0891b2,#0e7490 40%,#0f766e 100%);
+  position:relative;overflow:hidden;
+}
+.whyBg::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle at 20% 50%,rgba(255,255,255,.06) 0,transparent 50%),
+                   radial-gradient(circle at 80% 20%,rgba(255,255,255,.04) 0,transparent 40%);
+}
+.whyGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
+.whyCard{
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:22px;padding:34px 28px;
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.whyCard::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--g2);transform:scaleX(0);transform-origin:left;transition:.4s;
+}
+.whyCard:hover{background:rgba(255,255,255,.18);transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.15)}
+.whyCard:hover::before{transform:scaleX(1)}
+.whyIco{font-size:36px;margin-bottom:18px;display:block}
+.whyCard h4{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:#fff;margin-bottom:10px}
+.whyCard p{font-size:14px;color:rgba(255,255,255,.72);line-height:1.75}
+
+/* ──────── TEAM ──────── */
+.teamBg{background:linear-gradient(180deg,#fff,#f0fbff)}
+.teamGrid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:52px}
+.teamCard{
+  display:flex;gap:26px;align-items:center;
+  background:#fff;border:1.5px solid #e2f5f8;
+  border-radius:24px;padding:30px;
+  box-shadow:0 8px 28px rgba(8,145,178,.08);
+  transition:all .3s;
+}
+.teamCard:hover{transform:translateY(-5px);box-shadow:0 20px 52px rgba(8,145,178,.16);border-color:rgba(8,145,178,.3)}
+.teamAv{
+  width:110px;height:110px;border-radius:20px;flex-shrink:0;
+  background:var(--g1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:44px;color:rgba(255,255,255,.4);
+  box-shadow:0 8px 24px rgba(8,145,178,.3);
+}
+.teamInfo h3{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--dark);margin-bottom:3px}
+.teamInfo .desg{font-size:13px;font-weight:700;color:var(--teal);margin-bottom:5px}
+.teamInfo .qual{font-size:11px;color:var(--gray);margin-bottom:10px;letter-spacing:.3px}
+.teamInfo p{font-size:13px;color:#475569;line-height:1.7}
+
+/* ──────── REVIEWS (auto-scroll) ──────── */
+.revBg{background:linear-gradient(135deg,#f0fbff,#fff8e1)}
+.revTrackWrap{
+  overflow:hidden;position:relative;margin-top:52px;
+  mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent);
+}
+.revTrack{display:flex;gap:20px;animation:slide 32s linear infinite;width:max-content}
+.revTrack:hover{animation-play-state:paused}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.revCard{
+  width:310px;flex-shrink:0;
+  background:#fff;border:1.5px solid #e2f5f8;
+  border-radius:20px;padding:26px;
+  box-shadow:0 6px 20px rgba(8,145,178,.08);
+  border-left:4px solid var(--teal);
+  transition:transform .3s;
+}
+.revCard:hover{transform:translateY(-4px)}
+.revStars{color:var(--amber2);font-size:14px;margin-bottom:12px}
+.revTxt{font-size:13px;color:#475569;line-height:1.7;margin-bottom:16px}
+.revAuthor{display:flex;align-items:center;gap:12px}
+.revAv{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--g1);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:13px;
+}
+.revName{font-size:14px;font-weight:700;color:var(--dark)}
+.revDate{font-size:11px;color:var(--gray)}
+
+/* ──────── CONTACT ──────── */
+.cntBg{background:linear-gradient(135deg,#f0fdf4,#e0f7fa,#fff8e1)}
+.cntGrid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;margin-top:52px}
+.infoItem{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:16px 0;border-bottom:1px solid rgba(8,145,178,.1);
+}
+.infoIco{
+  width:44px;height:44px;border-radius:13px;flex-shrink:0;
+  background:linear-gradient(135deg,#e0f7fa,#b2ebf2);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--teal);font-size:17px;
+  box-shadow:0 4px 12px rgba(8,145,178,.15);
+}
+.infoTxt strong{display:block;font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;font-weight:700}
+.infoTxt a,.infoTxt span{font-size:14px;color:var(--dark);font-weight:500;text-decoration:none}
+.infoTxt a:hover{color:var(--teal)}
+.cntActions{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.cBtn{
+  display:flex;align-items:center;gap:8px;
+  padding:13px 22px;border-radius:50px;
+  font-size:14px;font-weight:700;text-decoration:none;transition:all .3s;
+}
+.cBtnWa{background:var(--wa);color:#fff;box-shadow:0 4px 14px rgba(37,211,102,.35)}
+.cBtnWa:hover{background:var(--wa2);transform:translateY(-2px)}
+.cBtnCall{background:#fff;color:var(--teal);border:2px solid rgba(8,145,178,.25);box-shadow:var(--shadow)}
+.cBtnCall:hover{background:var(--teal);color:#fff;transform:translateY(-2px)}
+
+.cntForm{
+  background:#fff;border:1.5px solid rgba(8,145,178,.15);
+  border-radius:28px;padding:40px;
+  box-shadow:0 16px 48px rgba(8,145,178,.12);
+}
+.cntForm h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--dark);margin-bottom:4px}
+.cntForm>p{font-size:13px;color:var(--gray);margin-bottom:26px}
+.subBtn{
+  width:100%;padding:15px;border:none;border-radius:14px;
+  background:var(--g1);color:#fff;cursor:pointer;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  transition:all .3s;margin-bottom:10px;
+  box-shadow:0 6px 20px rgba(8,145,178,.35);
+  position:relative;overflow:hidden;
+}
+.subBtn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.2),transparent);transform:translateX(-100%) skewX(-20deg);transition:.45s}
+.subBtn:hover::after{transform:translateX(200%) skewX(-20deg)}
+.subBtn:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(8,145,178,.5)}
+.subBtnWa{
+  width:100%;padding:13px;border:none;border-radius:14px;
+  background:rgba(37,211,102,.08);color:#16a34a;
+  border:1.5px solid rgba(37,211,102,.25);
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;
+  cursor:pointer;transition:all .3s;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  text-decoration:none;
+}
+.subBtnWa:hover{background:var(--wa);color:#fff;border-color:var(--wa)}
+
+/* ──────── FOOTER ──────── */
+footer{
+  background:linear-gradient(135deg,#0891b2,#0e7490,#0f766e);
+  padding:72px 60px 32px;position:relative;overflow:hidden;
+}
+footer::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle at 10% 80%,rgba(255,255,255,.06),transparent 40%),
+                   radial-gradient(circle at 90% 10%,rgba(255,255,255,.05),transparent 35%);
+}
+.ftGrid{display:grid;grid-template-columns:2.2fr 1fr 1fr 1.2fr;gap:52px;margin-bottom:52px;position:relative;z-index:1}
+.ftBrand h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:10px}
+.ftBrand p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.8;max-width:280px;margin-bottom:20px}
+.socials{display:flex;gap:10px}
+.sBt{
+  width:38px;height:38px;border-radius:10px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.75);text-decoration:none;font-size:15px;
+  transition:all .3s;
+}
+.sBt:hover{background:rgba(255,255,255,.25);color:#fff;transform:translateY(-3px)}
+.ftCol h4{font-size:12px;font-weight:800;color:rgba(255,255,255,.9);margin-bottom:16px;text-transform:uppercase;letter-spacing:1.5px}
+.ftCol ul{list-style:none}
+.ftCol ul li{margin-bottom:9px}
+.ftCol ul li a{font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s}
+.ftCol ul li a:hover{color:#fff}
+.ftBot{
+  position:relative;z-index:1;
+  padding-top:24px;border-top:1px solid rgba(255,255,255,.15);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:12px;color:rgba(255,255,255,.4);
+}
+
+/* ──────── WA FLOAT ──────── */
+.waFloat{
+  position:fixed;bottom:28px;right:28px;z-index:999;
+  width:62px;height:62px;border-radius:50%;
+  background:var(--wa);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:30px;text-decoration:none;
+  box-shadow:0 6px 28px rgba(37,211,102,.55);
+  animation:waB 2.5s ease-in-out infinite;
+}
+.waFloat:hover{animation-play-state:paused;transform:scale(1.12)!important}
+@keyframes waB{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.waTip{
+  position:fixed;bottom:42px;right:98px;z-index:998;
+  background:#fff;color:var(--dark);
+  font-size:13px;font-weight:600;padding:9px 16px;border-radius:10px;
+  white-space:nowrap;opacity:0;transition:opacity .3s;pointer-events:none;
+  box-shadow:0 6px 20px rgba(8,145,178,.18);border:1px solid rgba(8,145,178,.15);
+}
+.waTip::after{content:'';position:absolute;right:-5px;top:50%;transform:translateY(-50%) rotate(45deg);width:8px;height:8px;background:#fff;border-right:1px solid rgba(8,145,178,.15);border-top:1px solid rgba(8,145,178,.15)}
+.waFloat:hover+.waTip{opacity:1}
+
+/* ──────── MODAL ──────── */
+.mBack{
+  display:none;position:fixed;inset:0;z-index:3000;
+  background:rgba(8,145,178,.15);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;padding:20px;
+}
+.mBack.on{display:flex}
+.mBox{
+  background:#fff;border-radius:28px;padding:40px;
+  width:100%;max-width:500px;position:relative;
+  animation:mPop .35s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 40px 100px rgba(8,145,178,.25);
+  border:1.5px solid rgba(8,145,178,.15);
+}
+@keyframes mPop{from{opacity:0;transform:scale(.88) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.mClose{
+  position:absolute;top:16px;right:16px;
+  width:34px;height:34px;border-radius:10px;
+  background:#f1f5f9;border:none;cursor:pointer;
+  color:var(--gray);font-size:16px;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
+}
+.mClose:hover{background:var(--teal);color:#fff}
+.mBox h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--dark);margin-bottom:4px}
+.mBox>p{font-size:13px;color:var(--gray);margin-bottom:22px}
+.mSuc{text-align:center;padding:20px 0}
+.mSuc .ck{font-size:56px;color:var(--mint);display:block;margin-bottom:14px;animation:ckIn .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes ckIn{from{transform:scale(0)}to{transform:scale(1)}}
+.mSuc h4{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--dark);margin-bottom:8px}
+.mSuc p{font-size:14px;color:var(--gray);margin-bottom:20px}
+
+/* ──────── TOAST ──────── */
+.toast{
+  position:fixed;bottom:100px;left:50%;
+  transform:translateX(-50%) translateY(10px);
+  background:#fff;color:var(--dark);
+  border:1.5px solid rgba(8,145,178,.2);
+  padding:12px 24px;border-radius:50px;
+  font-size:14px;font-weight:600;z-index:4000;
+  opacity:0;transition:all .3s;pointer-events:none;
+  box-shadow:0 8px 28px rgba(8,145,178,.2);white-space:nowrap;
+}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ──────── SCROLL REVEAL ──────── */
+.rv{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+
+/* ──────── RESPONSIVE ──────── */
+@media(max-width:1024px){
+  nav{padding:0 24px}
+  .nLinks{display:none}
+  .heroInner{grid-template-columns:1fr;padding:100px 24px 60px}
+  .bookCard,.showGrid,.cntGrid,.teamGrid{grid-template-columns:1fr;gap:36px}
+  .svcGrid{grid-template-columns:repeat(2,1fr)}
+  .pkgGrid{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto}
+  .whyGrid{grid-template-columns:1fr 1fr}
+  .ftGrid{grid-template-columns:1fr 1fr;gap:32px}
+  .sec{padding:72px 24px}
+  footer{padding:56px 24px 28px}
+}
+@media(max-width:600px){
+  .svcGrid{grid-template-columns:1fr 1fr}
+  .whyGrid{grid-template-columns:1fr}
+  .heroStats{gap:20px}
+  .gr2{grid-template-columns:1fr}
+  .ftGrid{grid-template-columns:1fr}
+  .ftBot{flex-direction:column;gap:8px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="curR"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-pulse"><i class="fas fa-heartbeat"></i></div>
+  <div class="ld-logo">Khush<span>vika</span></div>
+  <div class="ld-sub">Diagnostics &amp; Care</div>
+  <div class="ld-bar"><div class="ld-fill"></div></div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <a href="#" class="nLogo">
+    <div class="nIcon"><i class="fas fa-heartbeat"></i></div>
+    <div class="nTitle"><h1>Khushvika</h1><span>Diagnostics &amp; Care</span></div>
+  </a>
+  <ul class="nLinks">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nBtns">
+    <a href="https://wa.me/918500999497?text=Hello%20Khushvika%20Diagnostics!" target="_blank" class="bWa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <button class="bBook" onclick="openModal()"><i class="fas fa-calendar-plus"></i> Book Now</button>
+  </div>
+</nav>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="hero">
+  <!-- Blobs -->
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+  <!-- Floating icons -->
+  <div class="floatIcon" style="left:5%;animation-duration:14s;animation-delay:0s">💉</div>
+  <div class="floatIcon" style="left:18%;animation-duration:11s;animation-delay:3s">🔬</div>
+  <div class="floatIcon" style="left:45%;animation-duration:16s;animation-delay:1s">❤️</div>
+  <div class="floatIcon" style="left:70%;animation-duration:13s;animation-delay:4s">🧬</div>
+  <div class="floatIcon" style="left:88%;animation-duration:10s;animation-delay:2s">💊</div>
+  <div class="floatIcon" style="left:32%;animation-duration:18s;animation-delay:6s">🩺</div>
+
+  <div class="heroInner">
+    <!-- LEFT -->
+    <div>
+      <div class="heroBadge"><div class="pulse"></div><span>Trusted Diagnostic Centre — Hyderabad</span></div>
+      <h1 class="heroH1">
+        Your Health,<br>
+        <span class="g">Precisely</span><br>
+        <span class="gA">Diagnosed.</span>
+      </h1>
+      <p class="heroP">State-of-the-art diagnostics with compassionate care. From blood tests to CT scans — everything under one roof at Khushvika Diagnostics &amp; Care, Ramachandrapuram.</p>
+      <div class="heroCtas">
+        <button class="btnPrimary" onclick="openModal()"><i class="fas fa-calendar-check"></i> Book Appointment</button>
+        <a href="https://wa.me/918500999497?text=Hi%2C%20I%20want%20to%20book%20an%20appointment." target="_blank" class="btnWaOutline"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+      </div>
+      <div class="heroStats">
+        <div class="hStat"><div class="n" data-c="30">0</div><div class="l">Lab Experts</div></div>
+        <div class="hStat"><div class="n" data-c="5000">0</div><div class="l">Patients Served</div></div>
+        <div class="hStat"><div class="n" data-c="100">0</div><div class="l">% Accuracy</div></div>
+        <div class="hStat"><div class="n" data-c="138">0</div><div class="l">Google Reviews</div></div>
+      </div>
+    </div>
+    <!-- BOOKING CARD -->
+    <div class="bookCard">
+      <h3>Quick Appointment</h3>
+      <p>Fill in &amp; we'll confirm within 30 minutes</p>
+      <label class="lbl">Full Name</label>
+      <input class="inp" type="text" id="h-name" placeholder="Your full name">
+      <label class="lbl">Phone Number</label>
+      <input class="inp" type="tel" id="h-phone" placeholder="+91 XXXXXXXXXX">
+      <label class="lbl">Service / Test</label>
+      <select class="inp" id="h-svc">
+        <option value="">Select service</option>
+        <option>CT Scan</option><option>Ultrasound Studies</option>
+        <option>Liver Fibro Scan</option><option>Endoscopy</option>
+        <option>Blood Investigation</option><option>Sonomammography</option>
+        <option>Hormonal Analysis</option><option>X-Ray</option>
+        <option>OPG</option><option>2D Echo / ECG</option><option>PFT / TMT</option>
+        <option>Health Package</option>
+      </select>
+      <div class="gr2">
+        <div><label class="lbl">Date</label><input class="inp" type="date" id="h-date"></div>
+        <div>
+          <label class="lbl">Time Slot</label>
+          <select class="inp" id="h-time">
+            <option value="">Select</option>
+            <option>7:00–9:00 AM</option><option>9:00–11:00 AM</option>
+            <option>11 AM–1 PM</option><option>2:00–4:00 PM</option>
+            <option>4:00–6:00 PM</option><option>6:00–8:00 PM</option>
+            <option>8:00–10:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <button class="bBtn" onclick="submitHero()"><i class="fas fa-calendar-check"></i> Book Appointment</button>
+      <a id="hWaBtn" href="#" target="_blank" class="bWaBtn"><i class="fab fa-whatsapp"></i> Book via WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE -->
+<div class="wave"><svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="width:100%;height:60px"><path fill="#fff" d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z"/></svg></div>
+
+<!-- ══════════════════ SHOWCASE ══════════════════ -->
+<section class="sec showcase" id="about">
+  <div class="secInner showGrid">
+    <div class="showImgWrap rv">
+      <img src="/mnt/user-data/uploads/1774242482213_image.png" alt="Khushvika Diagnostics Building">
+      <div class="imgBadge">
+        <div class="bdot"></div>
+        <div class="bInfo"><strong>Open Now</strong><span>7:00 AM – 10:00 PM Daily</span></div>
+      </div>
+    </div>
+    <div class="rv">
+      <div class="secLabel">Our Facility</div>
+      <h2 class="secTitle">A World-Class <span class="g">Diagnostic Centre</span><br>at Your Doorstep</h2>
+      <p class="secSub">Khushvika Diagnostics &amp; Care is a premier multi-floor medical facility in Ramachandrapuram, Hyderabad. Built with advanced infrastructure, patient-first design, and cutting-edge equipment — every health need under one roof.</p>
+      <div class="pills">
+        <div class="pill"><i class="fas fa-building"></i> Multi-Floor Facility</div>
+        <div class="pill"><i class="fas fa-microchip"></i> Advanced Equipment</div>
+        <div class="pill"><i class="fas fa-user-md"></i> Expert Radiologists</div>
+        <div class="pill"><i class="fas fa-clock"></i> Open 7 Days</div>
+        <div class="pill"><i class="fab fa-whatsapp"></i> Reports on WhatsApp</div>
+        <div class="pill"><i class="fas fa-tags"></i> Affordable Prices</div>
+      </div>
+      <a href="https://wa.me/918500999497?text=I%27d%20like%20to%20know%20more%20about%20Khushvika." target="_blank" class="btnPrimary" style="display:inline-flex;font-size:14px;padding:13px 26px">
+        <i class="fab fa-whatsapp"></i> Ask Us Anything
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE 2 -->
+<div class="wave" style="background:#fff"><svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="width:100%;height:60px"><path fill="#f0fbff" d="M0,20 C360,60 1080,0 1440,30 L1440,60 L0,60 Z"/></svg></div>
+
+<!-- ══════════════════ SERVICES ══════════════════ -->
+<section class="sec svcBg" id="services">
+  <div class="secInner">
+    <div class="rv" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
+      <div>
+        <div class="secLabel">Diagnostic Services</div>
+        <h2 class="secTitle">Everything Your <span class="g">Health Needs</span></h2>
+      </div>
+      <p style="font-size:13px;color:var(--gray);font-weight:600">Click any service to book instantly →</p>
+    </div>
+    <div class="svcGrid">
+      <div class="svcCard rv" onclick="openModal('CT Scan')"><div class="svcIco"><i class="fas fa-brain"></i></div><div class="svcName">CT Scan</div><div class="svcSub">High-resolution imaging</div></div>
+      <div class="svcCard rv" onclick="openModal('Ultrasound Studies')"><div class="svcIco"><i class="fas fa-wave-square"></i></div><div class="svcName">Ultrasound Studies</div><div class="svcSub">Abdomen, pelvis &amp; more</div></div>
+      <div class="svcCard rv" onclick="openModal('Liver Fibro Scan')"><div class="svcIco"><i class="fas fa-seedling"></i></div><div class="svcName">Liver Fibro Scan</div><div class="svcSub">Non-invasive assessment</div></div>
+      <div class="svcCard rv" onclick="openModal('Endoscopy')"><div class="svcIco"><i class="fas fa-microscope"></i></div><div class="svcName">Endoscopy</div><div class="svcSub">GI tract visualization</div></div>
+      <div class="svcCard rv" onclick="openModal('Blood Investigation')"><div class="svcIco"><i class="fas fa-vial"></i></div><div class="svcName">Blood Investigation</div><div class="svcSub">CBP, sugar, cultures</div></div>
+      <div class="svcCard rv" onclick="openModal('Sonomammography')"><div class="svcIco"><i class="fas fa-female"></i></div><div class="svcName">Sonomammography</div><div class="svcSub">Breast health screening</div></div>
+      <div class="svcCard rv" onclick="openModal('Hormonal Analysis')"><div class="svcIco"><i class="fas fa-dna"></i></div><div class="svcName">Hormonal Analysis</div><div class="svcSub">TSH, FSH, LH &amp; more</div></div>
+      <div class="svcCard rv" onclick="openModal('X-Ray')"><div class="svcIco"><i class="fas fa-x-ray"></i></div><div class="svcName">X-Ray</div><div class="svcSub">Digital radiography</div></div>
+      <div class="svcCard rv" onclick="openModal('Culture Studies')"><div class="svcIco"><i class="fas fa-flask"></i></div><div class="svcName">Culture Studies</div><div class="svcSub">Infection detection</div></div>
+      <div class="svcCard rv" onclick="openModal('OPG')"><div class="svcIco"><i class="fas fa-tooth"></i></div><div class="svcName">OPG</div><div class="svcSub">Dental panoramic X-ray</div></div>
+      <div class="svcCard rv" onclick="openModal('2D Echo / ECG')"><div class="svcIco"><i class="fas fa-heart-pulse"></i></div><div class="svcName">2D Echo / ECG</div><div class="svcSub">Cardiac evaluation</div></div>
+      <div class="svcCard rv" onclick="openModal('PFT / TMT')"><div class="svcIco"><i class="fas fa-lungs"></i></div><div class="svcName">PFT / TMT</div><div class="svcSub">Lung &amp; treadmill tests</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE 3 -->
+<div class="wave" style="background:#f0fbff"><svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="width:100%;height:60px"><path fill="#f0fbff" d="M0,30 C480,60 960,0 1440,30 L1440,60 L0,60 Z"/></svg></div>
+
+<!-- ══════════════════ PACKAGES ══════════════════ -->
+<section class="sec pkgBg" id="packages">
+  <div class="secInner">
+    <div class="rv">
+      <div class="secLabel">Health Packages</div>
+      <h2 class="secTitle">Comprehensive <span class="gA">Screening Packages</span></h2>
+      <p class="secSub">Tailored diagnostic packages for every need — from routine check-ups to full-body evaluations.</p>
+    </div>
+    <div class="pkgGrid">
+      <div class="pkgCard rv"><div class="pkgTop"><h3>Basic Wellness</h3><div class="tline">Ideal annual routine checkup</div><div class="pkgPriceRow"><div class="pkgPrice">₹999</div><div class="pkgPer">/ person</div></div></div><div class="pkgBody"><ul class="pkgList"><li><i class="fas fa-check-circle"></i> Complete Blood Picture (CBP)</li><li><i class="fas fa-check-circle"></i> Blood Sugar (Fasting &amp; PP)</li><li><i class="fas fa-check-circle"></i> Urine Routine Examination</li><li><i class="fas fa-check-circle"></i> Kidney Function Test</li><li><i class="fas fa-check-circle"></i> Liver Function Test</li><li><i class="fas fa-check-circle"></i> Chest X-Ray</li></ul><button class="pkgBookBtn" onclick="openModal('Basic Wellness ₹999')">Book Package</button><a href="#" class="pkgWaBtn" onclick="waPkg('Basic Wellness - ₹999',event)"><i class="fab fa-whatsapp"></i> Book via WhatsApp</a></div></div>
+
+      <div class="pkgCard pop rv"><div class="popTag">⭐ Popular</div><div class="pkgTop"><h3>Comprehensive Health</h3><div class="tline">Full-body detailed screening</div><div class="pkgPriceRow"><div class="pkgPrice">₹2,499</div><div class="pkgPer">/ person</div></div></div><div class="pkgBody"><ul class="pkgList"><li><i class="fas fa-check-circle"></i> All Basic Wellness tests</li><li><i class="fas fa-check-circle"></i> Thyroid Profile (T3, T4, TSH)</li><li><i class="fas fa-check-circle"></i> Lipid Profile Complete</li><li><i class="fas fa-check-circle"></i> Vitamin B12 &amp; D3</li><li><i class="fas fa-check-circle"></i> ECG &amp; Ultrasound Abdomen</li><li><i class="fas fa-check-circle"></i> Doctor Consultation</li></ul><button class="pkgBookBtn" onclick="openModal('Comprehensive Health ₹2,499')">Book Package</button><a href="#" class="pkgWaBtn" onclick="waPkg('Comprehensive Health - ₹2,499',event)"><i class="fab fa-whatsapp"></i> Book via WhatsApp</a></div></div>
+
+      <div class="pkgCard rv"><div class="pkgTop"><h3>Women's Health</h3><div class="tline">Designed exclusively for women</div><div class="pkgPriceRow"><div class="pkgPrice">₹1,799</div><div class="pkgPer">/ person</div></div></div><div class="pkgBody"><ul class="pkgList"><li><i class="fas fa-check-circle"></i> CBP &amp; Urine Routine</li><li><i class="fas fa-check-circle"></i> Hormonal Analysis (FSH, LH)</li><li><i class="fas fa-check-circle"></i> Thyroid Profile</li><li><i class="fas fa-check-circle"></i> Sonomammography</li><li><i class="fas fa-check-circle"></i> Pelvic Ultrasound</li><li><i class="fas fa-check-circle"></i> Vitamin D &amp; Iron Studies</li></ul><button class="pkgBookBtn" onclick="openModal('Women\'s Health ₹1,799')">Book Package</button><a href="#" class="pkgWaBtn" onclick="waPkg('Women\'s Health - ₹1,799',event)"><i class="fab fa-whatsapp"></i> Book via WhatsApp</a></div></div>
+
+      <div class="pkgCard rv"><div class="pkgTop"><h3>Cardiac Care</h3><div class="tline">Heart health assessment</div><div class="pkgPriceRow"><div class="pkgPrice">₹3,199</div><div class="pkgPer">/ person</div></div></div><div class="pkgBody"><ul class="pkgList"><li><i class="fas fa-check-circle"></i> Lipid Profile Complete</li><li><i class="fas fa-check-circle"></i> 2D Echocardiogram</li><li><i class="fas fa-check-circle"></i> ECG (Resting)</li><li><i class="fas fa-check-circle"></i> TMT (Treadmill Test)</li><li><i class="fas fa-check-circle"></i> Chest X-Ray</li><li><i class="fas fa-check-circle"></i> Cardiac Enzyme Panel</li></ul><button class="pkgBookBtn" onclick="openModal('Cardiac Care ₹3,199')">Book Package</button><a href="#" class="pkgWaBtn" onclick="waPkg('Cardiac Care - ₹3,199',event)"><i class="fab fa-whatsapp"></i> Book via WhatsApp</a></div></div>
+
+      <div class="pkgCard rv"><div class="pkgTop"><h3>Senior Citizen</h3><div class="tline">Special for 60+ years</div><div class="pkgPriceRow"><div class="pkgPrice">₹1,499</div><div class="pkgPer">/ person</div></div></div><div class="pkgBody"><ul class="pkgList"><li><i class="fas fa-check-circle"></i> CBP, Sugar, KFT, LFT</li><li><i class="fas fa-check-circle"></i> Thyroid, Vitamin D &amp; B12</li><li><i class="fas fa-check-circle"></i> Bone Density (BMD)</li><li><i class="fas fa-check-circle"></i> ECG &amp; Chest X-Ray</li><li><i class="fas fa-check-circle"></i> Urine Routine</li></ul><button class="pkgBookBtn" onclick="openModal('Senior Citizen ₹1,499')">Book Package</button><a href="#" class="pkgWaBtn" onclick="waPkg('Senior Citizen - ₹1,499',event)"><i class="fab fa-whatsapp"></i> Book via WhatsApp</a></div></div>
+
+      <div class="pkgCard rv"><div class="pkgTop"><h3>Corporate Package</h3><div class="tline">Bulk bookings for organisations</div><div class="pkgPriceRow"><div class="pkgPrice">Custom</div><div class="pkgPer">pricing</div></div></div><div class="pkgBody"><ul class="pkgList"><li><i class="fas fa-check-circle"></i> Tailored test panels</li><li><i class="fas fa-check-circle"></i> On-site health camp</li><li><i class="fas fa-check-circle"></i> Group discounts</li><li><i class="fas fa-check-circle"></i> Dedicated reports portal</li><li><i class="fas fa-check-circle"></i> Annual wellness programs</li></ul><button class="pkgBookBtn" onclick="openModal('Corporate Package')">Enquire Now</button><a href="https://wa.me/918500999497?text=Hi%2C%20I%20am%20interested%20in%20the%20Corporate%20Package." target="_blank" class="pkgWaBtn"><i class="fab fa-whatsapp"></i> Chat for Pricing</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ WHY US ══════════════════ -->
+<section class="sec whyBg">
+  <div class="secInner">
+    <div class="rv">
+      <div class="secLabel" style="color:rgba(255,255,255,.7)">Why Khushvika</div>
+      <h2 class="secTitle" style="color:#fff">The Reasons Patients <span style="font-style:italic;color:var(--amber2)">Trust Us</span></h2>
+    </div>
+    <div class="whyGrid">
+      <div class="whyCard rv"><span class="whyIco">🔬</span><h4>Advanced Technology</h4><p>State-of-the-art diagnostic equipment ensures precise and reliable results for confident healthcare decisions.</p></div>
+      <div class="whyCard rv"><span class="whyIco">🩺</span><h4>Certified Professionals</h4><p>Every test is conducted by certified specialists and radiologists with years of dedicated experience.</p></div>
+      <div class="whyCard rv"><span class="whyIco">⚡</span><h4>Fast Results</h4><p>Streamlined workflows deliver accurate reports quickly — because your time and health matter equally.</p></div>
+      <div class="whyCard rv"><span class="whyIco">❤️</span><h4>Patient-Centered Care</h4><p>Compassionate, attentive service for every patient — from infants to senior citizens, with a smile.</p></div>
+      <div class="whyCard rv"><span class="whyIco">💰</span><h4>Affordable Pricing</h4><p>Transparent, competitive rates with zero hidden charges. Quality diagnostics for every budget.</p></div>
+      <div class="whyCard rv"><span class="whyIco">📲</span><h4>Reports on WhatsApp</h4><p>Get diagnostic reports delivered instantly on WhatsApp — paperless, fast, and super convenient.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ TEAM ══════════════════ -->
+<section class="sec teamBg" id="team">
+  <div class="secInner">
+    <div class="rv">
+      <div class="secLabel">Expert Doctors</div>
+      <h2 class="secTitle">Meet Our <span class="g">Medical Team</span></h2>
+    </div>
+    <div class="teamGrid">
+      <div class="teamCard rv">
+        <div class="teamAv"><i class="fas fa-user-doctor"></i></div>
+        <div class="teamInfo">
+          <h3>Dr. Ajay Kumar Patwadi</h3>
+          <div class="desg">GI / Bariatric / Laparoscopic Surgeon</div>
+          <div class="qual">MBBS · MS · MAS (FNB) · FALS · FACRSI</div>
+          <p>17+ years in GI surgery and laparoscopy. Practices at Pace Hospital, Hitech City. Fellowship in Minimal Access Surgery from Global Hospitals.</p>
+        </div>
+      </div>
+      <div class="teamCard rv">
+        <div class="teamAv"><i class="fas fa-user-nurse"></i></div>
+        <div class="teamInfo">
+          <h3>Dr. Tinaimeiru Golmei</h3>
+          <div class="desg">Radiologist &amp; Managing Director</div>
+          <div class="qual">MBBS · MDRD</div>
+          <p>Expert radiologist and MD of Khushvika Diagnostics. Former Asst. Professor at Maheshwara Medical College. Specialist in diagnostic imaging.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ REVIEWS ══════════════════ -->
+<section class="sec revBg" id="reviews">
+  <div class="secInner">
+    <div class="rv">
+      <div class="secLabel">Patient Reviews</div>
+      <h2 class="secTitle">138+ <span class="gA">Verified Google Reviews</span></h2>
+    </div>
+  </div>
+  <div class="revTrackWrap rv">
+    <div class="revTrack">
+      <div class="revCard"><div class="revStars">★★★★★</div><p class="revTxt">Prompt service and accurate results. Highly recommended for all diagnostic services!</p><div class="revAuthor"><div class="revAv">PP</div><div><div class="revName">Prasad Parimi</div><div class="revDate">Dec 2024</div></div></div></div>
+      <div class="revCard"><div class="revStars">★★★★★</div><p class="revTxt">One of the best diagnostic centres near Lingampally. Technician Ratna is very friendly. Radiologist Saidulu sir explains reports clearly.</p><div class="revAuthor"><div class="revAv">PD</div><div><div class="revName">Pranayraj Dumpala</div><div class="revDate">Dec 2024</div></div></div></div>
+      <div class="revCard"><div class="revStars">★★★★★</div><p class="revTxt">Very reasonable prices, polite staff and doctor. Quick response. Especially Ratna garu treated me very well. Highly recommend! ❤️</p><div class="revAuthor"><div class="revAv">YY</div><div><div class="revName">Yasodhag Yasu</div><div class="revDate">Oct 2024</div></div></div></div>
+      <div class="revCard"><div class="revStars">★★★★★</div><p class="revTxt">Very polite staff, good doctors, friendly atmosphere, reasonable cost and quick response! Specially Ratna garu ❤️</p><div class="revAuthor"><div class="revAv">YG</div><div><div class="revName">Yasodha Gandhuli</div><div class="revDate">Oct 2024</div></div></div></div>
+      <div class="revCard"><div class="revStars">★★★★★</div><p class="revTxt">Affordable prices and great service. Staff is polite with quick response. Overall fantastic experience — highly recommended!</p><div class="revAuthor"><div class="revAv">PR</div><div><div class="revName">Prabhakar Reddy</div><div class="revDate">Oct 2024</div></div></div></div>
+      <div class="revCard"><div class="revStars">★★★★★</div><p class="revTxt">Staff made blood collection painless for our baby. Reports were swift and crucial for timely treatment. Very grateful!</p><div class="revAuthor"><div class="revAv">RK</div><div><div class="revName">Ramesh Babu K</div><div class="revDate">Sep 2024</div></div></div></div>
+      <div class="revCard"><div class="revStars">★★★★★</div><p class="revTxt">Good staff, very professional. Recommended to all! Very caring environment throughout the visit.</p><div class="revAuthor"><div class="revAv">VK</div><div><div class="revName">Vinay Kumar</div><div class="revDate">Sep 2024</div></div></div></div>
+      <div class="revCard"><div class="revStars">★★★★★</div><p class="revTxt">Dr. Ashwin was friendly and listened carefully. Staff Amar made booking smooth. Great diagnostic experience overall!</p><div class="revAuthor"><div class="revAv">YP</div><div><div class="revName">Yennampelli Pavan</div><div class="revDate">Oct 2024</div></div></div></div>
+      <!-- Duplicates for seamless loop -->
+      <div class="revCard"><div class="revStars">★★★★★</div><p class="revTxt">Prompt service and accurate results. Highly recommended for all diagnostic services!</p><div class="revAuthor"><div class="revAv">PP</div><div><div class="revName">Prasad Parimi</div><div class="revDate">Dec 2024</div></div></div></div>
+      <div class="revCard"><div class="revStars">★★★★★</div><p class="revTxt">One of the best diagnostic centres near Lingampally. Technician Ratna is very friendly. Radiologist Saidulu sir explains reports clearly.</p><div class="revAuthor"><div class="revAv">PD</div><div><div class="revName">Pranayraj Dumpala</div><div class="revDate">Dec 2024</div></div></div></div>
+      <div class="revCard"><div class="revStars">★★★★★</div><p class="revTxt">Very reasonable prices, polite staff and doctor. Quick response. Especially Ratna garu treated me very well. Highly recommend! ❤️</p><div class="revAuthor"><div class="revAv">YY</div><div><div class="revName">Yasodhag Yasu</div><div class="revDate">Oct 2024</div></div></div></div>
+      <div class="revCard"><div class="revStars">★★★★★</div><p class="revTxt">Affordable prices and great service. Staff is polite with quick response. Overall fantastic experience — highly recommended!</p><div class="revAuthor"><div class="revAv">PR</div><div><div class="revName">Prabhakar Reddy</div><div class="revDate">Oct 2024</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CONTACT ══════════════════ -->
+<section class="sec cntBg" id="contact">
+  <div class="secInner contact-inner">
+    <div class="rv">
+      <div class="secLabel">Contact &amp; Booking</div>
+      <h2 class="secTitle">Visit Us or <span class="g">Book Online</span></h2>
+    </div>
+    <div class="cntGrid">
+      <div class="rv">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--dark);margin-bottom:12px">We're Here For You</h3>
+        <p style="font-size:15px;color:var(--gray);line-height:1.75;margin-bottom:8px">Open every day. Walk in or book ahead for priority service. WhatsApp us anytime for instant assistance.</p>
+        <div class="infoItem"><div class="infoIco"><i class="fas fa-map-marker-alt"></i></div><div class="infoTxt"><strong>Branch 1</strong><span>24-45/1, NH 65, Kakatiya Nagar, Near Ashok Nagar Bus Stop, Ramachandra Puram, Sangareddy – 502032</span></div></div>
+        <div class="infoItem"><div class="infoIco"><i class="fas fa-map-marker-alt"></i></div><div class="infoTxt"><strong>Branch 2</strong><span>Sri Mallikarjuna Complex, Opp. New Bus Stand, Sangareddy, Telangana</span></div></div>
+        <div class="infoItem"><div class="infoIco"><i class="fas fa-phone"></i></div><div class="infoTxt"><strong>Phone / WhatsApp</strong><a href="tel:+918500999497">+91 85009 99497</a></div></div>
+        <div class="infoItem"><div class="infoIco"><i class="fas fa-envelope"></i></div><div class="infoTxt"><strong>Email</strong><a href="mailto:khushvikacare@gmail.com">khushvikacare@gmail.com</a></div></div>
+        <div class="infoItem"><div class="infoIco"><i class="fas fa-clock"></i></div><div class="infoTxt"><strong>Working Hours</strong><span>Monday – Sunday: 7:00 AM – 10:00 PM</span></div></div>
+        <div class="cntActions">
+          <a href="https://wa.me/918500999497?text=Hello%20Khushvika!" target="_blank" class="cBtn cBtnWa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          <a href="tel:+918500999497" class="cBtn cBtnCall"><i class="fas fa-phone"></i> Call Now</a>
+        </div>
+      </div>
+      <div class="cntForm rv">
+        <h3>Book an Appointment</h3>
+        <p>We'll confirm your slot within 30 minutes</p>
+        <label class="lbl">Full Name *</label>
+        <input class="inp" type="text" id="c-name" placeholder="Your full name">
+        <div class="gr2">
+          <div><label class="lbl">Phone *</label><input class="inp" type="tel" id="c-phone" placeholder="+91 XXXXXXXXXX"></div>
+          <div><label class="lbl">Age</label><input class="inp" type="number" id="c-age" placeholder="Age"></div>
+        </div>
+        <label class="lbl">Gender</label>
+        <select class="inp" id="c-gender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select>
+        <label class="lbl">Service / Package *</label>
+        <select class="inp" id="c-svc">
+          <option value="">Select a service</option>
+          <option>CT Scan</option><option>Ultrasound Studies</option><option>Liver Fibro Scan</option>
+          <option>Endoscopy</option><option>Blood Investigation</option><option>Sonomammography</option>
+          <option>Hormonal Analysis</option><option>X-Ray</option><option>OPG</option>
+          <option>2D Echo / ECG</option><option>PFT / TMT</option>
+          <option>Basic Wellness (₹999)</option><option>Comprehensive Health (₹2,499)</option>
+          <option>Women's Health (₹1,799)</option><option>Cardiac Care (₹3,199)</option>
+          <option>Senior Citizen (₹1,499)</option><option>Corporate Package</option>
+        </select>
+        <div class="gr2">
+          <div><label class="lbl">Date *</label><input class="inp" type="date" id="c-date"></div>
+          <div><label class="lbl">Time *</label>
+            <select class="inp" id="c-time">
+              <option value="">Select</option>
+              <option>7:00–9:00 AM</option><option>9:00–11:00 AM</option>
+              <option>11 AM–1 PM</option><option>2:00–4:00 PM</option>
+              <option>4:00–6:00 PM</option><option>6:00–8:00 PM</option><option>8:00–10:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <label class="lbl">Notes</label>
+        <textarea class="inp" id="c-notes" rows="2" placeholder="Special requirements or symptoms..."></textarea>
+        <button class="subBtn" onclick="submitContact()"><i class="fas fa-calendar-check"></i> Confirm Appointment</button>
+        <a id="cWaBtn" href="#" target="_blank" class="subBtnWa"><i class="fab fa-whatsapp"></i> Send via WhatsApp Instead</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <div class="ftGrid">
+    <div class="ftBrand">
+      <h2>Khushvika Diagnostics &amp; Care</h2>
+      <p>Your trusted partner in health diagnostics — accurate results, advanced technology, and compassionate care. Serving Hyderabad with dedication.</p>
+      <div class="socials">
+        <a href="#" class="sBt"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="sBt"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="sBt"><i class="fab fa-youtube"></i></a>
+        <a href="https://wa.me/918500999497" target="_blank" class="sBt"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="ftCol"><h4>Navigation</h4><ul><li><a href="#">Home</a></li><li><a href="#services">Services</a></li><li><a href="#packages">Packages</a></li><li><a href="#team">Team</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    <div class="ftCol"><h4>Services</h4><ul><li><a href="#">CT Scan</a></li><li><a href="#">Ultrasound</a></li><li><a href="#">Blood Tests</a></li><li><a href="#">ECG / TMT</a></li><li><a href="#">Endoscopy</a></li><li><a href="#">X-Ray / OPG</a></li></ul></div>
+    <div class="ftCol"><h4>Contact</h4><ul><li><a href="tel:+918500999497">+91 8500999497</a></li><li><a href="mailto:khushvikacare@gmail.com">khushvikacare@gmail.com</a></li><li><a>Mon–Sun: 7AM – 10PM</a></li><li><a href="https://wa.me/918500999497" target="_blank">WhatsApp Us</a></li><li><a>Ramachandrapuram, Hyderabad</a></li></ul></div>
+  </div>
+  <div class="ftBot">
+    <span>© 2025 Khushvika Diagnostics and Care. All Rights Reserved.</span>
+    <span style="color:rgba(255,255,255,.3)">Built with ❤️ for your health</span>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/918500999497?text=Hello%20Khushvika!" target="_blank" class="waFloat"><i class="fab fa-whatsapp"></i></a>
+<div class="waTip">Chat with us instantly!</div>
+
+<!-- MODAL -->
+<div class="mBack" id="modal">
+  <div class="mBox">
+    <button class="mClose" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    <div id="mF">
+      <h3>Book Your Appointment</h3>
+      <p>We'll confirm within 30 minutes</p>
+      <label class="lbl">Full Name *</label>
+      <input class="inp" type="text" id="m-name" placeholder="Your full name">
+      <div class="gr2">
+        <div><label class="lbl">Phone *</label><input class="inp" type="tel" id="m-phone" placeholder="+91 XXXXXXXXXX"></div>
+        <div><label class="lbl">Age</label><input class="inp" type="number" id="m-age" placeholder="Age"></div>
+      </div>
+      <label class="lbl">Service *</label>
+      <select class="inp" id="m-svc">
+        <option value="">Select</option>
+        <option>CT Scan</option><option>Ultrasound Studies</option><option>Liver Fibro Scan</option>
+        <option>Endoscopy</option><option>Blood Investigation</option><option>Sonomammography</option>
+        <option>Hormonal Analysis</option><option>X-Ray</option><option>OPG</option>
+        <option>2D Echo / ECG</option><option>PFT / TMT</option>
+        <option>Basic Wellness (₹999)</option><option>Comprehensive Health (₹2,499)</option>
+        <option>Women's Health (₹1,799)</option><option>Cardiac Care (₹3,199)</option><option>Senior Citizen (₹1,499)</option>
+      </select>
+      <div class="gr2">
+        <div><label class="lbl">Date</label><input class="inp" type="date" id="m-date"></div>
+        <div><label class="lbl">Time</label>
+          <select class="inp" id="m-time">
+            <option value="">Select</option>
+            <option>7:00–9:00 AM</option><option>9:00–11:00 AM</option>
+            <option>11 AM–1 PM</option><option>2:00–4:00 PM</option>
+            <option>4:00–6:00 PM</option><option>6:00–8:00 PM</option><option>8:00–10:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <button class="subBtn" style="margin-top:6px" onclick="submitModal()"><i class="fas fa-calendar-check"></i> Confirm Appointment</button>
+      <a id="mWaBtn" href="#" target="_blank" class="subBtnWa"><i class="fab fa-whatsapp"></i> Book via WhatsApp</a>
+    </div>
+    <div id="mS" style="display:none" class="mSuc">
+      <span class="ck"><i class="fas fa-check-circle"></i></span>
+      <h4>Appointment Requested!</h4>
+      <p>Our team will call you within 30 minutes to confirm. Also confirm instantly on WhatsApp below.</p>
+      <a id="mWaC" href="#" target="_blank" class="btnWaOutline" style="display:inline-flex;margin-top:4px"><i class="fab fa-whatsapp"></i> Confirm on WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// LOADER
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('gone'),2100));
+
+// CURSOR
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+document.addEventListener('mousemove',e=>{
+  cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';
+  setTimeout(()=>{curR.style.left=e.clientX+'px';curR.style.top=e.clientY+'px'},90);
+});
+document.querySelectorAll('a,button,.svcCard,.pkgCard,.whyCard,.teamCard,.pill').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='22px';cur.style.height='22px';curR.style.width='54px';curR.style.height='54px'});
+  el.addEventListener('mouseleave',()=>{cur.style.width='14px';cur.style.height='14px';curR.style.width='38px';curR.style.height='38px'});
+});
+
+// NAVBAR
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('stuck',scrollY>30));
+
+// MIN DATE
+const td=new Date().toISOString().split('T')[0];
+document.querySelectorAll('input[type=date]').forEach(e=>e.min=td);
+
+// COUNTERS
+function count(el,t){
+  let c=0;const s=Math.max(1,Math.ceil(t/70));
+  const ti=setInterval(()=>{c=Math.min(c+s,t);el.textContent=c.toLocaleString();if(c>=t)clearInterval(ti)},22);
+}
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('vis');
+      e.target.querySelectorAll('[data-c]').forEach(el=>count(el,+el.dataset.c));
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%5)*.07+'s';obs.observe(el)});
+setTimeout(()=>document.querySelectorAll('[data-c]').forEach(el=>count(el,+el.dataset.c)),2200);
+
+// WA MSG
+function wMsg(n,p,s,d,t,a='',g='',notes=''){
+  let m=`*🏥 Appointment Request – Khushvika Diagnostics*\n\n`;
+  m+=`👤 *Name:* ${n||'N/A'}\n📞 *Phone:* ${p||'N/A'}\n`;
+  if(a)m+=`🎂 *Age:* ${a}\n`;
+  if(g)m+=`⚧ *Gender:* ${g}\n`;
+  m+=`🔬 *Service:* ${s||'N/A'}\n📅 *Date:* ${d||'N/A'}\n⏰ *Time:* ${t||'N/A'}\n`;
+  if(notes)m+=`📝 *Notes:* ${notes}\n`;
+  m+=`\nPlease confirm my appointment. Thank you! 🙏`;
+  return `https://wa.me/918500999497?text=${encodeURIComponent(m)}`;
+}
+
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),3000)}
+
+// HERO
+function updateHWa(){document.getElementById('hWaBtn').href=wMsg(document.getElementById('h-name').value,document.getElementById('h-phone').value,document.getElementById('h-svc').value,document.getElementById('h-date').value,document.getElementById('h-time').value)}
+['h-name','h-phone','h-svc','h-date','h-time'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('change',updateHWa)});
+function submitHero(){
+  const n=document.getElementById('h-name').value,p=document.getElementById('h-phone').value,s=document.getElementById('h-svc').value;
+  if(!n||!p||!s){toast('⚠️ Please fill Name, Phone & Service');return}
+  window.open(wMsg(n,p,s,document.getElementById('h-date').value,document.getElementById('h-time').value),'_blank');
+  toast('✅ Opening WhatsApp to confirm!');
+}
+
+// CONTACT
+function updateCWa(){document.getElementById('cWaBtn').href=wMsg(document.getElementById('c-name').value,document.getElementById('c-phone').value,document.getElementById('c-svc').value,document.getElementById('c-date').value,document.getElementById('c-time').value,document.getElementById('c-age').value,document.getElementById('c-gender').value,document.getElementById('c-notes').value)}
+['c-name','c-phone','c-svc','c-date','c-time','c-age','c-gender','c-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('change',updateCWa)});
+function submitContact(){
+  const n=document.getElementById('c-name').value,p=document.getElementById('c-phone').value,s=document.getElementById('c-svc').value,d=document.getElementById('c-date').value,t=document.getElementById('c-time').value;
+  if(!n||!p||!s||!d||!t){toast('⚠️ Please fill all required (*) fields');return}
+  window.open(wMsg(n,p,s,d,t,document.getElementById('c-age').value,document.getElementById('c-gender').value,document.getElementById('c-notes').value),'_blank');
+  toast('✅ Booking sent via WhatsApp!');
+}
+
+// MODAL
+function openModal(svc=''){
+  document.getElementById('modal').classList.add('on');
+  document.getElementById('mF').style.display='block';
+  document.getElementById('mS').style.display='none';
+  if(svc)document.getElementById('m-svc').value=svc;
+  document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('modal').classList.remove('on');document.body.style.overflow=''}
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+function updateMWa(){document.getElementById('mWaBtn').href=wMsg(document.getElementById('m-name').value,document.getElementById('m-phone').value,document.getElementById('m-svc').value,document.getElementById('m-date').value,document.getElementById('m-time').value,document.getElementById('m-age').value)}
+['m-name','m-phone','m-svc','m-date','m-time','m-age'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('change',updateMWa)});
+function submitModal(){
+  const n=document.getElementById('m-name').value,p=document.getElementById('m-phone').value,s=document.getElementById('m-svc').value;
+  if(!n||!p||!s){toast('⚠️ Please fill Name, Phone & Service');return}
+  const url=wMsg(n,p,s,document.getElementById('m-date').value,document.getElementById('m-time').value,document.getElementById('m-age').value);
+  document.getElementById('mWaC').href=url;
+  document.getElementById('mF').style.display='none';
+  document.getElementById('mS').style.display='block';
+}
+
+function waPkg(pkg,e){
+  e.preventDefault();
+  const m=`*Package Enquiry – Khushvika Diagnostics*\n\nHi, I am interested in the *${pkg}* package.\nPlease share availability and details. Thank you!`;
+  window.open(`https://wa.me/918500999497?text=${encodeURIComponent(m)}`,'_blank');
+}
+</script>
+</body>
+</html>
